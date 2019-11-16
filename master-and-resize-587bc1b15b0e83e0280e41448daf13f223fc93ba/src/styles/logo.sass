@@ -1,0 +1,129 @@
+.logo
+  font-size: 0
+  height: 58px
+  width: 440px
+  display: inline-block
+  & > *
+    font-size: 19px
+    display: block
+    float: left
+    line-height: 1
+    height: inherit
+    box-sizing: border-box
+
+.logo--part
+  width: auto
+
+.logo--center
+  position: relative
+  display: block
+  left: 50%
+  margin-left: -169px
+
+.logo__master
+  height: 100%
+  border: 5px solid #000
+  padding: 15px 14px 15px 16px
+  position: relative
+
+.logo__resize
+  height: 100%
+  padding: 20px 19px 20px 21px
+  position: relative
+  color: #002bff
+  transition: padding-right .5s
+  .logo__resize__border
+    &:after, &:before
+      content: ''
+      display: block
+      position: absolute
+    &.logo__resize__border--horizontal
+      &:after, &:before
+        height: 5px
+        background: url(../images/dashed_line_blue.png) repeat-x center
+        +image-2x-height('../images/dashed_line_blue2x.png')
+        left: 21px
+        right: 21px
+      &:after
+        top: 0
+
+      &:before
+        bottom: 0
+    &.logo__resize__border--vertical
+      &:after, &:before
+        width: 5px
+        background: #002bff
+        top: 21px
+        bottom: 21px
+      &:after
+        right: 0
+
+      &:before
+        left: 0
+  .logo__resize__corner
+    &:after, &:before
+      content: ''
+      display: block
+      position: absolute
+      width: 12px
+      height: 12px
+
+    &.logo__resize__corner--top
+      &:after, &:before
+        top: 0
+
+      &:after
+        right: 0
+        border-top: 5px solid #002bff
+        border-right: 5px solid #002bff
+      &:before
+        border-top: 5px solid #002bff
+        border-left: 5px solid #002bff
+        left: 0
+    &.logo__resize__corner--bottom
+      &:after, &:before
+        bottom: 0
+      &:after
+        border-bottom: 5px solid #002bff
+        border-right: 5px solid #002bff
+        right: 0
+      &:before
+        border-bottom: 5px solid #002bff
+        border-left: 5px solid #002bff
+        left: 0
+
+.logo:hover
+  .logo__text--resize
+    margin-right: -24px
+    &:after
+      letter-spacing: 26px
+
+.page--main
+  .logo:hover
+    .logo__text--resize
+      transition-delay: .3s
+      &:after
+        transition-delay: .3s
+
+.logo__text
+  letter-spacing: 4px
+  display: block
+  font-family: logo
+
+.logo__text--and:after
+  content: '\e900'
+
+.logo__text--master:after
+  content: '\e904\e901\e906\e907\e902\e905'
+
+.logo__text--resize
+  transition: all .6s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+  &:after
+    //animation: animateResizeBack .7s forwards
+    transition: all .6s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    content: '\e905\e902\e906\e903\e908\e902'
+
+.logo__text--and
+  font-size: 20px
+  margin: 0 9px 0 11px
+  line-height: 58px

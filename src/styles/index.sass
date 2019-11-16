@@ -1,0 +1,1298 @@
+$baseFontSize: 15px
+
+@import mixins
+@import reset
+@import fonts
+@import svg
+@import logo
+@import animation
+
+$baseLineHeight: pxtorem(24px)
+$sectionsCount: 11
+$colorChangeTime: .2s
+$defaultTimingFunction: cubic-bezier(.175, .885, .32, 1)
+
+html, body
+  min-height: 100%
+
+html
+  font-size: $baseFontSize
+
+body
+  overflow: hidden
+  font-family: GothamPro
+  line-height: $baseLineHeight
+.mobile-show
+  display: none
+.popup_open
+  overflow: hidden!important
+
+.svg_wrapper
+  display: none
+
+.left
+  float: left
+
+.right
+  float: right
+
+.button
+  font-family: GothamPro-Black
+  font-weight: bold
+  text-transform: uppercase
+  +no-select
+$headerHeight: 48px
+$headerBorder: 4px
+
+.m0auto
+  margin: 0 auto
+
+header
+  box-sizing: border-box
+  position: fixed
+  top: 0
+  width: 100%
+  z-index: $sectionsCount + 1
+  height: $headerHeight
+  line-height: $headerHeight
+  background-color: #000
+  color: #fff
+  transition: background-color $colorChangeTime $defaultTimingFunction
+  padding: 0 15px
+  will-change: background-color
+  .left > *
+    float: left
+  .right > *
+    float: right
+  &:after
+    content: ''
+    display: block
+    position: absolute
+    bottom: -$headerBorder
+    background: #fff623
+    transition: width $colorChangeTime/1.5
+    width: 0
+    right: 0
+    height: $headerBorder
+
+  .logo_small
+    float: left
+    cursor: pointer
+    display: block
+    width: 43px
+    height: 100%
+    margin-right: 18px
+    svg
+      top: -2px
+      height: 25px
+      .a, .b
+        fill: #fff
+        transition: fill $colorChangeTime $defaultTimingFunction
+
+.order_button
+  font-size: 12px
+  color: #000
+  background-color: #fff843
+  transition: color $colorChangeTime $defaultTimingFunction, background-color $colorChangeTime $defaultTimingFunction, opacity $colorChangeTime $defaultTimingFunction $colorChangeTime/2
+  cursor: pointer
+  will-change: opacity
+  height: $headerHeight
+  &:hover
+    background: #002bff
+    color: #fff
+
+.header_contacts
+  svg
+    fill: #fff
+    transition: fill $colorChangeTime $defaultTimingFunction
+  .phone
+    svg
+      top: -1px
+      width: 24px
+      height: 24px
+  .messenger
+    svg
+      width: 25px
+      height: 26px
+  .phone, .messenger
+    position: relative
+    margin-left: 2px
+    padding: 0 4px
+    cursor: pointer
+    display: block
+    float: left
+    height: 100%
+  a:hover
+    svg
+      fill: #fff843
+
+.language
+  font-size: 14px
+  cursor: pointer
+  margin: 0 33px 0 37px
+  transition: color $colorChangeTime $defaultTimingFunction
+
+.fb-like
+  float: left
+  & > span
+    top: -1px
+    vertical-align: middle!important
+.like-label
+  color: #fff
+  transition: color $colorChangeTime $defaultTimingFunction
+  svg
+    margin: 0 12px 0 15px
+    width: 54px
+    height: 12px
+    stroke: #fff
+    fill: none
+    transition: stroke $colorChangeTime $defaultTimingFunction
+
+
+.page--main.active ~ header
+  transition: background-color $colorChangeTime/2 $defaultTimingFunction
+  background-color: transparent
+  .like-label
+    color: #000
+    svg
+      stroke: #000
+  .logo_small svg
+    .a
+      fill: #000
+    .b
+      fill: #002bff
+  .header_contacts svg
+    fill: #000
+  .language
+    color: #000
+
+  .order_button
+    pointer-events: none
+    opacity: 0
+    transition: color $colorChangeTime $defaultTimingFunction, background-color $colorChangeTime $defaultTimingFunction, opacity $colorChangeTime/1.3 $defaultTimingFunction
+
+.page--products.active ~ header
+  .order_button
+    background: #fff
+    color: #002bff
+    &:hover
+      background: #0014d9
+      color: #fff
+
+.page--portfolio.active ~ header
+  .order_button
+    background: #0014d9
+    color: #fff
+    &:hover
+      background: #fff
+      color: #002bff
+
+.page--skills.active ~ header
+  .order_button
+    background: #0014d9
+    color: #fff
+    &:hover
+      background: #fff
+      color: #002bff
+
+.page--contacts.active ~ header
+  &:after
+    width: 100%
+
+.page--production.active ~ header
+  .order_button
+    background: #fff
+    color: #002bff
+
+$sectionTransformTime: 1s
+
+@for $i from 1 through $sectionsCount
+  section.page:nth-child(#{$i})
+    z-index: $sectionsCount - $i
+
+.page
+  display: flex
+  flex-direction: column
+  overflow: hidden
+  text-align: center
+  box-sizing: border-box
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  will-change: transform
+  pointer-events: none
+  transition: transform $sectionTransformTime $defaultTimingFunction
+  backface-visibility: hidden
+  +transform(translate3d(0, -100%, 0))
+  -webkit-backface-visibility: hidden
+  background: #f6f6f6
+
+
+.page.active
+  pointer-events: initial
+  +transform(translate3d(0, 0, 0))
+  & ~ .page
+    +transform(translate3d(0, 0, 0))
+
+
+.page--team
+  background: #fff
+.page--products, .page--production
+  background: #fff843
+
+.page--contacts
+  background: #000000
+  color: #fff
+.page--prices
+  background: #fff
+body.disabled_scroll_animation
+  section.page
+    transition: none
+
+
+.page__bg
+  position: absolute
+  width: 100%
+  height: 100%
+  canvas.canvas-bg
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+  canvas.rectangles
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+
+.page__inner
+  position: relative
+  z-index: 1
+  margin: auto 0
+  padding: 60px 0
+  .logo_small
+    display: inline-block
+    width: 42px
+    height: 25px
+    margin-top: 6vh
+
+.page__inner--production
+  padding: 60px 60px 0
+
+.page__inner--team
+  position: relative
+  z-index: 2
+
+.copyright
+  background: url(../images/copyright.png) center no-repeat
+  width: 16px
+  height: 158px
+  left: 6px
+  bottom: 45px
+  position: absolute
+
+.points_group
+  position: absolute
+  z-index: 2
+
+.points
+  background: url(../images/points.svg) center no-repeat
+  width: 115px
+  height: 134px
+  float: left
+  margin: 5px 6px 6px 0
+
+.points--horizontal
+  background: url(../images/points_horizontal.svg) center no-repeat
+  height: 115px
+  width: 134px
+  margin: 0 5px 6px 6px
+
+.points--horizontal--blue
+  background-image: url(../images/points_blue_horizontal.svg)
+
+.points--horizontal--yellow
+  background-image: url(../images/points_yellow_horizontal.svg)
+
+.points--horizontal--yellow--thin
+  background-image: url(../images/points_yellow_horizontal_thin.svg)
+
+.figure
+  position: absolute
+  z-index: 0
+  background: #fff623
+$pagerColor: #000
+$markersSize: 10px
+$pagerColorChangeTime: .25s
+.pager
+  position: absolute
+  right: 29px
+  bottom: 110px
+  width: 10px
+  z-index: $sectionsCount + 1
+  will-change: opacity
+  opacity: 0
+  transition: opacity .5s
+  &.active
+    will-change: none
+    opacity: 1
+  &:after
+    content: ''
+    display: block
+    position: absolute
+    left: 50%
+    width: 2px
+    margin-left: -1px
+    top: 0
+    background: $pagerColor
+    bottom: 0
+    transition: background $colorChangeTime $defaultTimingFunction
+  span
+    cursor: pointer
+    z-index: 2
+    display: block
+    position: relative
+    margin-bottom: 1.6*$markersSize
+    border: 3px solid $pagerColor
+    background: $pagerColor
+    width: $markersSize
+    height: $markersSize
+    box-sizing: border-box
+    will-change: transform
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
+    transform: translateZ(0)
+    transition: background $colorChangeTime $defaultTimingFunction, border-color $colorChangeTime $defaultTimingFunction, transform 100ms
+    border-radius: 50%
+    &:hover
+      transform: scale(1.2) translateZ(0)
+    &:after
+      $touchSpacing: -.8*$markersSize
+      content: ''
+      display: block
+      position: absolute
+      left: $touchSpacing
+      top: $touchSpacing
+      right: $touchSpacing
+      bottom: $touchSpacing
+    &.active
+      pointer-events: none
+      background: #fff
+    &:last-child
+      margin-bottom: 0
+
+.page--contacts.active ~ .pager
+  &:after
+    background: #fff
+  span
+    background: #fff
+    border-color: #fff
+    &.active
+      background: $pagerColor
+
+$buttonBigSize: 70px
+$buttonBigBorder: 5px
+
+.button
+  display: inline-block
+  padding: 0 23px
+  +no-select()
+  letter-spacing: .2em
+  cursor: pointer
+
+.button--big
+  font-size: 18px
+  box-sizing: border-box
+  height: $buttonBigSize
+  line-height: $buttonBigSize - $buttonBigBorder*2
+  border: 5px solid #000
+  color: #002bff
+  transition: all $colorChangeTime
+  &:hover
+    color: #fff
+    background: #000
+
+.arrow
+  display: inline-block
+
+.arrow--down
+  display: block
+  width: 40px
+  height: 90px
+  margin: 52px auto 0
+  background: url(../images/arrow_down.svg) no-repeat center center
+
+.arrow--left, .arrow--right
+  &:before
+    content: ''
+    padding-bottom: 45.56%
+    display: block
+    width: 100%
+    background: url(../images/arrow_left.svg) no-repeat center
+
+.arrow--right
+  &:before
+    background: url(../images/arrow_right.svg) no-repeat center
+
+.arrow--brands
+  width: 10.59%
+
+.section_next
+  cursor: pointer
+
+.title
+  font-family: balezdrov11-Regular, Arial, sans-serif
+  font-size: pxtoem($baseFontSize, 50px)
+  line-height: 1.3em
+  display: block
+  max-width: 900px
+  padding: 0 20px
+  margin: 0 auto
+
+.title--contacts
+  margin-top: 75px
+
+.title--main
+  max-width: 1000px
+
+.title--skills
+  &:before
+    content: ''
+    display: block
+    width: pxtoem(50, 135)
+    height: pxtoem(50, 135)
+    background: url(../images/circle_and_square.svg) no-repeat
+    margin: 0 auto 35px
+
+.title--popup
+  margin-bottom: 30px
+
+.subtitle
+  max-width: 670px
+  line-height: 24px
+  margin: 18px auto 0
+
+.tags
+  font-size: 0
+  max-width: 1100px
+  margin: 0 auto
+
+.tag
+  padding: 0 1.23em
+  display: inline-block
+  line-height: 2.54em
+  margin: 0 12px 15px
+  font-size: 13px
+
+.tags--skills
+  .tag
+    background: #042dff
+    color: #fff
+
+.tags--platforms
+  .tag
+    background: #fff623
+    color: #000
+
+.tags--brands
+  font-family: Helvetica Neue, Helvetica, Arial
+  max-width: 896px
+  .tag
+    padding: 0 .56em
+    font-size: 18px
+    background: #f6f6f6
+    color: #000000
+    margin: 0 7px 15px
+    line-height: 2em
+
+.page--main
+  .subtitle
+    margin-top: 29px
+    font-size: 20px
+    margin-bottom: 75px
+  .logo
+    margin-bottom: 90px
+  canvas.canvas-bg
+    display: none
+
+.page--products
+
+  .subtitle
+    max-width: 590px
+
+.page--portfolio
+  background: #fff
+  .logo
+    margin-top: 3vh
+
+.page--skills
+  .skills_text
+    font-family: "GothamPro-Bold"
+    text-transform: uppercase
+    letter-spacing: .2em
+    max-width: 520px
+    font-size: 11.7px
+    line-height: 1.7em
+    margin: 35px auto 0
+  .tags
+    margin-top: 40px
+  .tags_platforms
+    margin-top: 25px
+
+.page--team
+  .subtitle
+    max-width: 580px
+    margin-top: 30px
+
+.page--contacts
+  .logo
+    *
+      color: #fff843
+    .logo__master
+      border-color: #fff843
+    .logo__resize
+      .logo__resize__corner
+        &:before, &:after
+          border-color: #fff843
+      .logo__resize__border
+        &.logo__resize__border--vertical
+          &:before, &:after
+            background: #fff843
+        &.logo__resize__border--horizontal
+          &:before, &:after
+            background-image: url(../images/dashed_line_yellow.png)
+            +image-2x-height('../images/dashed_line_yellow2x.png')
+
+.page--production
+  .subtitle
+    color: #747128
+    line-height: 26px
+
+.motivations
+  margin-top: 50px
+  display: table
+  width: 100%
+
+.motivation
+  min-height: 150px
+  box-sizing: border-box
+  width: 50%
+  display: block
+  float: left
+  text-align: left
+  position: relative
+  background-color: #fff
+  &:nth-child(odd)
+    .motivation__inner
+      float: right
+
+.motivation__inner
+  max-width: 489px
+  padding: 0 40px 0 150px
+  box-sizing: border-box
+  position: relative
+  &:before
+    height: 150px
+    width: 150px
+    content: ''
+    display: block
+    position: absolute
+    background: no-repeat center center
+    background-size: contain
+
+.motivation__text
+  min-height: 150px
+  box-sizing: border-box
+  display: flex
+  justify-content: center
+  flex-direction: column
+  line-height: 24px
+  position: relative
+  padding: 20px 0 20px 5px
+
+.motivation_image
+  height: 150px
+  width: 150px
+  float: left
+  position: relative
+  &:after
+    content: ''
+    display: block
+    position: absolute
+    background: no-repeat center center
+    background-size: contain
+
+.motivation--click, .motivation--interactive, .motivation--time
+  background: #fff843
+
+.motivation--click
+  .motivation__inner:before
+    top: 23px
+    left: -13px
+    width: 130px
+    height: 100px
+    background-image: url('../images/motivation_icon_1.png')
+    +image-2x('../images/motivation_icon_1_2x.png')
+
+.motivation--focus
+  .motivation__inner:before
+    top: 36px
+    left: -26px
+    width: 158px
+    height: 68px
+    background-image: url('../images/motivation_icon_2.png')
+    +image-2x('../images/motivation_icon_2_2x.png')
+
+.motivation--media
+  .motivation__inner:before
+    top: 25px
+    left: -5px
+    width: 123px
+    height: 112px
+    background-image: url('../images/motivation_icon_3.png')
+    +image-2x('../images/motivation_icon_3_2x.png')
+
+.motivation--interactive
+  .motivation__inner:before
+    top: 8px
+    left: 35px
+    width: 117px
+    height: 133px
+    background-image: url('../images/motivation_icon_4.png')
+    +image-2x('../images/motivation_icon_4_2x.png')
+
+.motivation--time
+  .motivation__inner:before
+    top: 24px
+    left: 14px
+    width: 80px
+    height: 103px
+    background-image: url('../images/motivation_icon_5.png')
+    +image-2x('../images/motivation_icon_5_2x.png')
+
+.motivation--success
+  .motivation__inner:before
+    top: 22px
+    left: 33px
+    width: 99px
+    height: 101px
+    background-image: url('../images/motivation_icon_6.png')
+    +image-2x('../images/motivation_icon_6_2x.png')
+
+.team
+  margin-top: 35px
+  font-size: 0
+  font-family: GothamPro-Medium
+
+.team__row
+  line-height: 32px
+  margin-bottom: 5px
+  li
+    display: inline-block
+    font-size: 20px
+    padding-left: 50px
+    position: relative
+    &:before
+      content: ''
+      position: absolute
+      display: block
+      width: 6px
+      height: 6px
+      background: currentColor
+      border-radius: 3px
+      left: 22px
+      top: 50%
+      margin-top: -3px
+    &:first-child
+      padding-left: 0
+      &:before
+        display: none
+
+.products_steps
+  text-align: left
+  width: 1060px
+  margin: 55px auto 0
+  +clearfix()
+
+.step
+  display: block
+  float: left
+  width: 351px
+  position: relative
+  &:last-child
+    width: 290px
+  &:first-child
+    padding-left: 68px
+  &:after
+    content: ''
+    display: block
+    position: absolute
+    width: 90px
+    height: 41px
+    right: 60px
+    background: url(../images/arrow_right.svg) no-repeat center
+    background-size: cover
+    top: 11px
+  &:last-child
+    &:after
+      display: none
+    .step__text
+      width: auto
+
+.step__icon
+  position: relative
+  margin-bottom: 35px
+  //height: 58px
+  display: inline-block
+
+.logo--steps
+  *
+    color: #000
+  .logo__master
+    border-color: #000
+  .logo__resize
+    .logo__resize__corner
+      &:before, &:after
+        border-color: #000
+    .logo__resize__border
+      &.logo__resize__border--vertical
+        &:before, &:after
+          background: #000
+      &.logo__resize__border--horizontal
+        &:before, &:after
+          background-image: url(../images/dashed_line.png)
+          +image-2x-height('../images/dashed_line2x.png')
+
+.step__icon--bubble
+  height: 76px
+  width: 137px
+  margin-top: -8px
+  margin-bottom: 20px
+  background: url(../images/bubble.svg) no-repeat center
+  .bubble_points
+    top: 23px
+    font-size: 0
+    position: absolute
+    z-index: 2
+    width: 100%
+    left: 0
+    text-align: center
+    span
+      position: relative
+    span, &:before, &:after
+      display: inline-block
+      width: 10px
+      border-radius: 50%
+      height: 10px
+      background: #000
+      margin: 0 7px
+    &:before, &:after
+      content: ''
+
+  svg
+    width: 138px
+    height: 76px
+    top: -7px
+  &:after
+    right: -149px
+
+.step__icon--master
+  &:after
+    right: -142px
+
+.step__icon--master, .step__icon--resize
+  .logo
+    &:before
+      transition: width 1s
+      content: ''
+      width: 100%
+      right: 0
+      position: absolute
+      height: 100%
+      display: block
+      background: #fff
+      z-index: 0
+
+.step__text
+  width: 260px
+
+.brands_title
+  text-align: center
+  max-width: 852px
+  padding: 0 18px
+  margin: 55px auto 30px
+  overflow: hidden
+  box-sizing: border-box
+  font-size: 0
+  .arrow
+    width: 10.59%
+  & > *
+    display: inline-block
+    vertical-align: middle
+
+  span
+    width: 78.82%
+    font-size: 18px
+    font-family: "GothamPro-Bold"
+    line-height: 2.33em
+
+.faces
+  position: absolute
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  z-index: 1
+
+.face
+  position: absolute
+  background: 0 0 no-repeat
+  background-size: 100% auto
+
+.face--1
+  right: 50%
+  margin-right: 444px
+  top: 60px
+  background-image: url(../images/face_1.svg)
+  width: 239px
+  height: 331px
+
+.face--2
+  left: 50%
+  margin-left: 376px
+  top: 114px
+  width: 147px
+  height: 282px
+  background-image: url(../images/face_2.svg)
+
+.face--3
+  top: 384px
+  right: 0
+  background-image: url(../images/face_3.png)
+  width: 174px
+  height: 186px
+
+.face--4
+  width: 126px
+  height: 184px
+  bottom: 106px
+  margin-right: 353px
+  right: 50%
+  background-image: url(../images/face_4.svg)
+
+.face--5
+  width: 92px
+  height: 137px
+  bottom: 32px
+  margin-left: 97px
+  left: 50%
+  background-image: url(../images/face_5.svg)
+
+.prices_image
+  background: url(../images/prices_image.png) no-repeat center
+  background-size: contain
+  width: 143px
+  height: 140px
+  margin: 0 auto 42px
+
+.price_list
+  overflow: hidden
+  margin: 55px auto 0
+  display: block
+  max-width: 886px
+  text-align: left
+
+.price
+  &:nth-child(3n+4)
+    clear: both
+  display: block
+  width: 33.33%
+  float: left
+  margin-bottom: 40px
+  padding-left: 64px
+  box-sizing: border-box
+
+.price__value
+  font-size: 16px
+
+.step__title
+  margin: 0 0 5px
+.step__title, .price__title
+  font-family: GothamPro-Bold
+  font-size: 20px
+  margin-bottom: 15px
+  line-height: 1.35em
+  width: 260px
+
+.contacts_list
+  width: 886px
+  margin: 80px auto 0
+  font-size: 0
+  text-align: left
+
+.contacts_list__item
+  display: inline-block
+  font-size: 20px
+  margin-left: 90px
+  &:first-child
+    margin-left: 80px
+
+.contact_link
+  transition: color $colorChangeTime
+  &:hover
+    text-decoration: none
+    color: #fff843
+  svg
+    fill: currentColor
+    display: inline-block
+    background: center no-repeat
+    background-size: contain
+    width: 30px
+    height: 30px
+    vertical-align: middle
+    margin-right: 19px
+    position: relative
+    top: -2px
+
+.contact_link--phone
+  &:before
+    background-image: url(../images/phone.svg)
+
+.contact_link--messenger
+
+.contact_link--email
+  &:before
+    width: 31px
+    height: 24px
+    background-image: url(../images/mail.svg)
+
+.address
+  color: #505050
+  font-size: 12px
+  letter-spacing: .2em
+  margin-top: 120px
+  font-family: GothamPro-Bold
+  text-transform: uppercase
+
+.book
+  margin: 2vh auto 0
+  box-sizing: border-box
+  text-transform: uppercase
+  position: relative
+  max-width: 250px
+  width: 25vh
+
+.book__image
+  position: relative
+  box-sizing: border-box
+  width: 100%
+  height: 0
+  padding: 0 1.9vh 137.28% .6vh
+  overflow: hidden
+  &:before
+    content: ''
+    display: block
+    position: absolute
+    top: 0
+    left: 0
+    background: url(../images/book.svg) no-repeat center
+    width: 100%
+    height: 100%
+
+.arrow--book
+  width: 99px
+  position: absolute
+  top: 50%
+  margin-top: -22px
+  &.arrow--left
+    left: 100%
+    margin-left: 112px
+  &.arrow--right
+    right: 100%
+    margin-right: 112px
+
+.book__title
+  font-family: GothamPro-Black
+  font-weight: bold
+  font-size: 1.1vh
+  line-height: 2vh
+  letter-spacing: .2em
+  padding: 0 1vh
+  margin-top: 4vh
+
+.book__logo
+  margin: 3vh auto 0
+  width: 10vh
+  height: 6.08vh
+  max-width: 135px
+  max-height: 82px
+  position: relative
+  left: 2%
+
+.book_description
+  max-width: 650px
+  line-height: 27px
+  margin: 2vh auto 0
+
+.book_request_title
+  font-family: GothamPro-Black
+  font-weight: bold
+  font-size: 11px
+  line-height: 2em
+  text-transform: uppercase
+  margin-top: 2vh
+  margin-bottom: 1.5vh
+
+.book_request_inner
+  margin: 0 auto
+  font-size: 0
+  input, button
+    vertical-align: top
+    display: inline-block
+    margin: 0 12px 12px
+    width: 312px
+
+button
+  display: block
+  background-color: #fff
+
+input, textarea
+  font-size: 1rem
+  display: block
+  background-color: #fff
+  height: $buttonBigSize
+  line-height: 42px
+  color: #000
+  padding: ($buttonBigSize - 42px)/2 34px
+  margin-bottom: 12px
+  +placeholder('#000')
+
+  &:focus
+    background: #fff
+    +placeholder('transparent')
+
+input:focus::-webkit-input-placeholder
+  color: transparent
+
+textarea
+  line-height: 28px
+
+form
+  position: relative
+  z-index: 1
+
+.popup__close
+  position: absolute
+  width: 21px
+  height: 21px
+  background-size: contain
+  cursor: pointer
+  top: 32px
+  right: 32px
+  svg
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    stroke: #000
+    transition: stroke $colorChangeTime
+  &:hover
+    svg
+      stroke: #002bff
+
+.popup__inner
+  overflow-x: hidden
+  box-sizing: border-box
+  margin: 100px auto
+  position: relative
+  will-change: transform
+  transition: transform .6s $defaultTimingFunction
+  transform: translate3d(0, -30%, 0)
+  border: 4px solid #000
+  padding: 87px 187px 113px
+  background: #fff843
+  max-width: 886px
+  input, textarea
+    width: 100%
+  textarea
+    resize: none
+    height: 160px
+  button
+    margin-top: 32px
+    padding: 0 53px
+
+.popup__inner--banner
+  padding: 85px 100px 120px
+  width: 100%
+
+  background: #fff
+
+.popup
+  z-index: 100
+  position: fixed
+  height: 100%
+  left: 0
+  top: 0
+  width: 100%
+  overflow-y: auto
+  opacity: 0
+  pointer-events: none
+  will-change: opacity
+  transition: opacity .2s $defaultTimingFunction
+  background-color: rgba(0, 0, 0, .3)
+  &.active
+    opacity: 1
+    pointer-events: auto
+    .popup__inner
+      transition: transform .4s $defaultTimingFunction
+      transform: translate3d(0, 0, 0)
+
+.popup--order
+  flex-direction: column
+  text-align: center
+
+$popupBannerMaxWidth: 563px
+.popup_banner_title
+  font-size: 18px
+  text-align: center
+  margin-bottom: 40px
+  font-family: Helvetica Neue, Helvetica, Arial
+
+.popup_banner_description
+  max-width: $popupBannerMaxWidth
+  margin-bottom: 30px
+
+.banners
+  overflow: hidden
+  margin-bottom: 27px
+
+.banner
+  margin-right: 20px
+  margin-bottom: 20px
+  float: left
+
+.banner_code
+  clear: both
+  color: #0014d9
+  max-width: $popupBannerMaxWidth
+$slide_width: 240px
+
+.slider_wrap
+  //display: flex
+  //justify-content: center
+  width: 100%
+  margin: 0 auto
+  padding-top: 80px
+
+.slider
+  font-size: 0
+  margin: 0 auto
+  white-space: nowrap
+  transition: transform .7s
+
+.slide
+  display: inline-block
+  position: relative
+  will-change: transform
+  &:hover:not(.active)
+    .slide__inner
+      &:after
+        opacity: 0
+      &:before
+        background-color: rgba(255, 255, 255, .6)
+      .slide__image
+        +filter(grayscale(50%))
+  &.active
+    z-index: 10
+    .slide__inner
+      &:after
+        opacity: 0
+      &:before
+        border-color: transparent
+        opacity: 0
+
+    .slide__title
+      font-size: 1rem
+      opacity: 1
+      transform: translate3d(0, 0, 0)
+      transition-delay: .6s
+      pointer-events: auto
+    .slide__image
+      +filter(grayscale(0) !important)
+      color: #fff
+    &:hover
+      .slide__inner
+        &:before
+          background-image: url(../images/slider_plus.svg)
+          background-color: rgba(255, 248, 67, 0.85)
+          opacity: 1
+
+.slide__title
+  position: absolute
+  top: -55px
+  color: #666666
+  width: 100%
+  pointer-events: none
+  opacity: 0
+  transition: opacity .3s, transform .3s
+  will-change: opacity, transform
+  transform: translate3d(0, 50%, 0)
+
+.slide__image
+  transition: all .4s
+  position: relative
+  background: red
+  width: 100%
+  padding-bottom: 166.67%
+  height: 0
+  color: #c7c7c7
+  background: center no-repeat
+  background-size: cover
+  +filter(grayscale(100%))
+
+.slide__inner
+  margin: 0 42px
+  cursor: pointer
+  position: relative
+  width: $slide_width
+
+  &:after, &:before
+    content: ''
+    position: absolute
+    display: block
+    z-index: 2
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    transform: translate3d(0, 0, 0)
+  $playSize: 33%
+  &:after
+    background: url(../images/play.svg) no-repeat center
+    background-size: $playSize auto
+    opacity: 1
+    will-change: opacity
+    transition: opacity .1s
+  &:before
+    transition: all .2s
+    background-color: rgba(255, 255, 255, 0.78)
+    box-sizing: border-box
+    border: 4px solid #002bff
+    background-position: center
+    background-repeat: no-repeat
+    background-size: $playSize auto
+
+.disabled_scroll_animation .slider
+  transition: none
+  .slide
+    .slide__image
+      transition: none
+    .slide__title
+      transition: none
+
+@import adaptive

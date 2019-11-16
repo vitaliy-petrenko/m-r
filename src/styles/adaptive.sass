@@ -1,0 +1,385 @@
+body:not(.mobile)
+  @media screen and (max-width: 900px)
+    .fb-like
+      width: 0
+    .like-label
+      display: none
+body.mobile
+  @media screen and (max-width: 600px)
+    .fb-like
+      width: 0
+    .like-label
+      display: none
+
+@media screen and (max-width: 1000px)
+  .price
+    &:nth-child(3n+4)
+      clear: none
+    &:nth-child(2n +3)
+      clear: both
+    width: 50%
+
+  .contacts_list
+    width: 100%
+    text-align: center
+    li
+      margin: 0 45px 25px !important
+  .products_steps
+    width: 100%
+    text-align: center
+  .step
+    width: 30%
+    padding: 0 !important
+    display: inline-block
+    float: none
+    &:after
+      display: none
+  .step__title, .step__text
+    width: 100%
+  .step__icon
+    margin: 0 auto 7px
+  .step__icon--bubble
+    margin: -8px auto 7px
+
+@media screen and (min-width: 700px) and (max-width: 1000px)
+  .step
+    width: 33.33% !important
+    box-sizing: border-box
+    display: block
+    float: left
+    margin: 0 !important
+    padding: 0 20px !important
+    &:first-child
+      margin: 0
+    &:last-child
+      width: 33.33% !important
+
+@media screen and (max-height: 770px)
+  .book
+    width: 18vh
+
+@media screen and (max-height: 900px)
+  .slider
+    .slide
+      .slide__inner
+        margin: 0 2vh
+        width: 20vh
+      .slide__title
+        font-size: 2vh
+        line-height: 1.5em
+
+=longrid()
+  .page
+    position: relative
+    height: auto
+    z-index: 1 !important
+    pointer-events: all
+    transform: none !important
+    transition: all 0s !important
+    min-height: 500px
+  .page__inner
+    transform: none !important
+    transition: all 0s !important
+  .title
+    transform: none !important
+    transition: all 0s !important
+  .pager
+    position: fixed
+
+=mobile()
+  +longrid()
+
+  .mobile-hide
+    display: none !important
+  .mobile-show
+    display: block
+  overflow: auto
+  font-size: 14px
+  .logo:not(.logo--steps)
+    font-size: 12px
+    @media screen and (min-width: 700px)
+      font-size: 16px
+  .page--main .logo
+    margin-bottom: 45px
+
+  .button--big
+    font-size: 17px
+    height: 63px
+    line-height: 53px
+  .button--big--popup
+    margin-top: 0
+    width: 100%
+  .button
+    padding: 0 22px
+
+  .arrow--down
+    margin-top: 37px
+    width: 21px
+    height: 45px
+  canvas.canvas-bg
+    display: block
+
+  canvas.rectangles
+    display: none
+  .page
+    font-size: 14px
+    .page__inner
+      padding: 50px 0
+  .page--contacts
+    .page__inner
+      padding-bottom: 100px
+
+  .logo_small
+    display: none !important
+  header
+    position: absolute
+    top: 0
+    bottom: auto
+    &:after
+      display: none
+    background: transparent !important
+    *
+      color: #000 !important
+    //.logo_small
+    //  display: none
+    svg
+      fill: #000 !important
+  .page--contacts.active ~ header
+    *
+      color: #fff !important
+    svg
+      fill: #fff !important
+  .language
+    margin: 0 14px
+  .order_button
+    position: fixed
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 2
+    background: #000!important
+    color: #fff!important
+    width: 100%
+    opacity: 1!important
+    transform: translateY(0)
+    transition: transform .3s, color .2s, background .2s
+  .step
+    @media screen and (max-width: 700px)
+      width: 100%
+      margin: 0 0 35px
+  .step__title
+    @media screen and (max-width: 700px)
+      max-width: 220px
+      margin-left: auto
+      margin-right: auto
+      margin-bottom: 5px
+
+  .pager
+    display: none
+  .title
+    max-width: 80vw
+    font-size: 35px
+    line-height: 48px
+  .title--contacts
+    margin-top: 35px
+  .title--skills:before
+    margin-bottom: 20px
+  .page--main
+    &.active ~ header
+      .order_button
+        transform: translateY(100px)
+    .page__inner
+      padding-top: 112px
+
+  .page--contacts.active ~ header
+    .order_button
+      background: #fbfc50!important
+      color: #000!important
+  .page--prices
+    background: #fff
+  .tags-wrap
+    width: 100%
+    overflow-x: auto
+  .tags
+    padding-bottom: 10px
+    width: 820px
+  .tag
+    margin: 0 6px 7px
+  .page--main
+    .arrow_down
+      margin-top: 35px
+      width: 21px
+      height: 45px
+    .logo_big
+      margin-bottom: 52px
+    .subtitle
+      font-size: 18px
+      margin: 25px auto
+  @media screen and (max-width: 700px)
+    .price_list
+      margin-top: 20px
+    .price
+      width: 100%
+      text-align: center
+      padding: 0
+      margin-bottom: 20px
+    .price__title
+      margin: 0 auto 10px
+      max-width: 80vw
+      width: 100%
+    .prices_image
+      width: 96px
+      height: 95px
+      margin-bottom: 20px
+  @media screen and (max-width: 700px)
+    .contacts_list
+      margin-top: 50px
+      text-align: left
+    .contacts_list__item
+      display: block
+      +clearfix()
+      margin: 0 0 24px 49px !important
+  .address
+    font-size: 9px
+    margin-top: 50px
+    @media screen and (min-width: 700px)
+      font-size: 11px
+  @media screen and (max-width: 800px)
+    .motivations
+      display: flex
+      flex-direction: column
+      margin-top: 30px
+    .motivation
+      display: flex
+      width: 100%
+      min-height: 0
+      background: #fff843 !important
+      padding: 0
+    .motivation__inner
+      max-width: initial
+      width: 100%
+      @media screen and (max-width: 700px)
+        padding: 0 4% 0 50%
+
+    .motivation__text
+      padding: 20px 0
+    .motivation--click
+      order: 1
+      .motivation__inner:before
+        top: 24px
+        left: 21px
+        width: 110px
+        height: 85px
+    .motivation--focus
+      order: 4
+      background-color: #fff !important
+      .motivation__inner:before
+        top: 30px
+        left: -10px
+        width: 131px
+        height: 60px
+    .motivation--media
+      order: 2
+      background-color: #fff !important
+      .motivation__inner:before
+        top: 27px
+        left: 26px
+        width: 92px
+        height: 84px
+    .motivation--interactive
+      order: 5
+      .motivation__inner:before
+        top: 14px
+        left: 30px
+        width: 94px
+        height: 115px
+    .motivation--time
+      order: 3
+      .motivation__inner:before
+        top: 21px
+        left: 38px
+        width: 70px
+        height: 91px
+    .motivation--success
+      order: 6
+      background-color: #fff !important
+
+      .motivation__inner:before
+        top: 26px
+        left: 28px
+        width: 95px
+        height: 95px
+
+  .skills_text
+    width: 90%
+    margin-top: 20px
+
+  @media screen and (max-width: 700px)
+    .team__row
+      margin: 0
+      li
+        font-size: 16px
+        padding-bottom: 30px
+        width: 100%
+        padding-left: 0
+        line-height: 1
+        &:first-child
+          &:before
+            display: block
+        &:before
+          position: absolute
+          left: 50%
+          bottom: 12px
+          top: auto
+      &:last-child
+        li:last-child
+          &:before
+            display: none
+  .face--1
+    left: 0
+    top: 80px
+    width: 150px
+    margin-left: -80px
+    display: block
+  .face--5
+    display: block
+    width: 72px
+    top: 360px
+    margin-left: 0
+    left: 0
+  .face--2
+    right: -21px
+    margin-left: 0
+    top: 210px
+    width: 87px
+    display: block
+    left: auto
+
+  .popup
+    overflow: hidden
+  .popup--order
+    .popup__inner
+      max-width: initial
+      border: 0
+      padding: 60px 13px 45px
+  .popup__inner
+    margin: 0
+    left: 0
+    position: absolute
+    bottom: 0
+    top: 0
+    width: 100%
+    box-sizing: border-box
+    overflow-y: auto
+    form
+      max-width: 600px
+      margin: 0 auto
+    &.popup_open
+      overflow: hidden
+
+body.mobile
+  +mobile
+
+body.longrid
+  overflow-y: auto
+  +longrid()
