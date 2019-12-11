@@ -48,9 +48,6 @@ class Popup {
 
   close() {
     if (!this.activePopup) return null;
-    if (this.lastHash) {
-      window.location.hash = this.lastHash;
-    }
     this.isOpen = false;
     this.activePopup.classList.remove('active');
     this.activePopup = null;

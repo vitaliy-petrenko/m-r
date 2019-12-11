@@ -31,8 +31,8 @@ const config = {
 let sections,
   scroll,
   pagerItems = [],
-  firstSrollTime = new Date().getTime(),
-  lastScrollTime = firstSrollTime,
+  firstScrollTime = new Date().getTime(),
+  lastScrollTime = firstScrollTime,
   mobileLastY, //for touch event
   mobileScrollSensitivity = .05, //percent of window height, that need to touch and move for scroll
   sectionsChangeEvent;
@@ -72,7 +72,6 @@ class Scroll {
       sections[this.activeSection].classList.remove(config.activeClass);
       pagerItems[this.activeSection].classList.remove(config.activeClass);
       this.activeSection = targetIndex;
-      window.location.hash = sections[this.activeSection].getAttribute(config.hashAttribute);
       sections[this.activeSection].classList.add(config.activeClass);
       pagerItems[this.activeSection].classList.add(config.activeClass);
       document.dispatchEvent(sectionsChangeEvent);
@@ -93,7 +92,6 @@ class Scroll {
     });
     sections = document.querySelectorAll(config.section);
     pagerInit();
-    initHash.call(this);
 
     mouseWheel(window, wheel);
     mobileTouchAndMove(window, touchStart, touchMove, touchEnd);
@@ -207,24 +205,6 @@ let touchEnd = () => {
   mobileLastY = null
 };
 
-function getIndexByHash() {
-  let hash = window.location.hash.substring(1),
-    index = 0;
-  if (!hash) return 0;
-  [].forEach.call(sections, (section, i) => {
-    let hashName = section.getAttribute(config.hashAttribute);
-    if (hash === hashName) {
-      index = i;
-      return null;
-    }
-  });
-  return index;
-}
-function initHash() {
-  let index = getIndexByHash();
-  scroll.changeSection(index, true);
-}
-
 let longridScroll = function () {
   if (!isMobile() && !isLongrid()) return;
   let activeSection,
@@ -244,7 +224,6 @@ let longridScroll = function () {
   sections[this.activeSection].classList.remove(config.activeClass);
   pagerItems[this.activeSection].classList.remove(config.activeClass);
   this.activeSection = targetIndex;
-  history.pushState(null, null, `#${sections[this.activeSection].getAttribute(config.hashAttribute)}`);
   sections[this.activeSection].classList.add(config.activeClass);
   pagerItems[this.activeSection].classList.add(config.activeClass);
   document.dispatchEvent(sectionsChangeEvent);
